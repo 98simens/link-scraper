@@ -1,0 +1,89 @@
+#:kivy 1.10.1
+#:import utils kivy.utils
+#:import resources kivy.resources
+
+<Button>:
+    background_normal: ''
+    background_down: ''
+    background_color: 1,1,1,1
+    color: 0,0,0,1
+    border: 0,0,0,0
+
+<Label>:
+    color: 0,0,0,1
+    height:20
+    size_hint_y: None
+
+<LinkScraper>:  
+    font_name: resources.resource_find('fonts/CaviarDreams.ttf')
+    background_color: 1,1,1,1
+    canvas:
+        Color:
+            rgb: utils.get_color_from_hex('#3cb878')
+        Rectangle:
+            pos: 0,root.height - 50
+            size: root.width, 50
+        Color:
+            rgb: 1,1,1
+        Rectangle:
+            size: root.width, root.height - 50
+            pos: 0,0
+    TextInput:
+        id: urlInput
+        pos: 10, root.height - 40
+        size: root.width * 0.8, 35
+        on_text_validate: root.startAnalyzeThread()
+        hint_text: 'Url'
+        multiline: False
+        focus: True
+        cursor_blink: False,
+        cursor_color: 0,0,0,1
+        font_size: 18
+    Button:
+        pos: 10 + root.width * 0.8 + 10, root.height - 40
+        size: root.width * 0.1, 35
+        text: 'Analyze'
+        on_press: root.startAnalyzeThread()
+    BoxLayout:
+        size: root.width - 20, 20
+        pos: 10, root.height - 70
+        size_hint_y: None
+        size_hint_x: None
+        orientation: 'horizontal'
+        canvas:
+            Color: 
+                rgb: 0,0,0
+            Rectangle:
+                pos: self.pos
+                size: self.width, 1
+        Label:
+            text: 'URL'
+            bold: True
+            size_hint: .7, 1
+            text_size: self.size
+        Label:
+            text: 'StatusCode'
+            bold: True
+            size_hint: .15, 1
+            text_size: self.size
+        Label:
+            text: 'responseTime'
+            bold: True
+            size_hint: .15, 1
+            text_size: self.size
+    ScrollView:
+        size: root.width - 20, root.height - 87
+        pos: 10, 10
+        GridLayout:
+            rows:1
+            cols:1
+            size_hint_y: None
+            height: self.minimum_height
+            id: resultLayout
+            orientation: 'vertical'
+            
+
+                
+        
+
+
